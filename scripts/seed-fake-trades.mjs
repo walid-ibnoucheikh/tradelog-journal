@@ -50,7 +50,7 @@ function tradingDays(daysBack) {
   return days
 }
 
-/** One to six trades a day, most days small, a few big wins and losses. */
+/** One to six trades a day, most days small, a few big losses. */
 export function fakeTrades(days = tradingDays(DAYS_BACK)) {
   const next = random(20260101)
   const trades = []
@@ -63,10 +63,10 @@ export function fakeTrades(days = tradingDays(DAYS_BACK)) {
       const quantity = 1 + Math.floor(next() * 4)
       const long = next() < 0.55
       const entry = 27000 + Math.round(next() * 2500 * 4) / 4
-      // Points gained: a bit more losers than winners, fat tails.
+      // Points gained: a profitable trader (about 6 trades in 10 win), small losses, a few big ones.
       const roll = next()
       const points =
-        roll < 0.45 ? -(6 + next() * 30) : roll < 0.9 ? 4 + next() * 40 : -(40 + next() * 60)
+        roll < 0.34 ? -(6 + next() * 16) : roll < 0.96 ? 4 + next() * 28 : -(30 + next() * 30)
       const move = Math.round(points * 4) / 4
       const exit = entry + (long ? move : -move)
       const gross = Math.round(move * POINT_VALUE * quantity * 100) / 100
