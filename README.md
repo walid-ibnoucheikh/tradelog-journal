@@ -4,6 +4,15 @@ Journal de trades pour le NQ et le MNQ (futures Nasdaq). Application personnelle
 firm Apex, Tradeify, Lucid…), reconstruction des trades, dashboard, Daily Journal, Notebook et
 rapports.
 
+## Aperçu
+
+Captures prises avec un historique **fictif** (compte de démonstration, générateur de données de test
+`scripts/seed-fake-trades.mjs`) : aucune donnée réelle.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+![Liste des trades](docs/screenshots/trades.png)
+
 ## Accès
 
 L'app est protégée par un mot de passe unique. Dans `.env.local` (et dans les variables de Vercel,
