@@ -1,0 +1,1 @@
+ALTER TABLE "accounts" ADD COLUMN "not_found_at" timestamp with time zone;

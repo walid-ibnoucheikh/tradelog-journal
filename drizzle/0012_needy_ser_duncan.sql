@@ -1,0 +1,1 @@
+ALTER TABLE "sync_requests" ADD COLUMN "firm" text;

@@ -1,0 +1,1 @@
+ALTER TABLE "sync_agent" ADD COLUMN "hot_until" timestamp with time zone;

@@ -1,0 +1,8 @@
+{
+  "name": "tradelog-agent",
+  "private": true,
+  "description": "Dependencies of the sync agent alone, so the cloud run installs them without the whole app.",
+  "dependencies": {
+    "playwright-core": "1.64.1"
+  }
+}

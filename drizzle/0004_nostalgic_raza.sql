@@ -1,0 +1,1 @@
+ALTER TABLE "trades" ADD COLUMN "break_even_override" boolean;

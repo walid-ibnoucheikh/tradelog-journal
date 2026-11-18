@@ -1,0 +1,66 @@
+name: Cloud sync
+
+# Syncs Tradovate in a GitHub runner (the only way: there is no local agent any more). The app's Sync buttons start this
+# workflow; it takes the waiting sync request, logs in to Tradovate in a fresh browser, exports
+# Fills and Cash History, sends them back to the app and exits. It can also be started by hand
+# (Actions tab > Run workflow) after a sync request was made.
+#
+# Repository secrets, all typed by the owner (Settings > Secrets and variables > Actions):
+#   SYNC_TOKEN             the same value as the app's SYNC_TOKEN
+#   TRADELOG_URL           the app's address, e.g. https://tradelog.example.com
+#   TRADELOG_CLOUD_VAULT   logins + browser states of the prop firms, made on the PC with
+#                          `npm run agent:export-cloud -- <prop firm> ...`. It holds passwords and
+#                          session tokens: never printed, never committed.
+# And in the app's environment (Vercel): CLOUD_SYNC_REPO ("owner/repository") and CLOUD_SYNC_TOKEN
+# (a fine-grained GitHub token limited to this repository with "Actions: write").
+
+on:
+  workflow_dispatch:
+    inputs:
+      queue_all:
+        description: "Queue a sync of all active accounts now (no need to start it from the app)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# Two clicks do not run two browsers on the same logins.
+concurrency:
+  group: cloud-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: agent/package-lock.json
+      # The agent needs Playwright alone: installing the whole app would take 40 s more.
+      - run: npm ci --prefix agent --ignore-scripts
+      # The runner image ships Google Chrome: use it. Fall back to Playwright's Chromium (slower,
+      # 20 s to 2 min of downloads) if an image ever stops shipping it.
+      - name: Pick the browser
+        run: |
+          if command -v google-chrome >/dev/null; then
+            echo "PLAYWRIGHT_CHROME_CHANNEL=chrome" >> "$GITHUB_ENV"
+            google-chrome --version
+          else
+            node agent/node_modules/playwright-core/cli.js install --with-deps chromium
+          fi
+
+      - name: Run the waiting sync request
+        run: node agent/cloud-run.mjs
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          TRADELOG_URLS: ${{ secrets.TRADELOG_URL }}
+          TRADELOG_CLOUD_VAULT: ${{ secrets.TRADELOG_CLOUD_VAULT }}
+          # "Queue all" ticked on a manual run: the run queues the sync itself.
+          QUEUE_ALL: ${{ inputs.queue_all }}
+          # Where a failed account saves a screenshot of the page (see diagnose in tradovate.mjs).
+          DIAGNOSTICS_DIR: ${{ runner.temp }}/diagnostics

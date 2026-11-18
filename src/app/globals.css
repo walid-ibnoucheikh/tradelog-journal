@@ -1,0 +1,514 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-profit: var(--profit);
+  --color-loss: var(--loss);
+  --color-be: var(--be);
+  --color-profit-text: var(--profit-text);
+  --color-loss-text: var(--loss-text);
+  --color-be-text: var(--be-text);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-to: var(--sidebar-to);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.975 0.004 270);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.5 0.2 283);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.62 0.16 283);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.2 0.08 275);
+  /* End of the sidebar gradient. */
+  --sidebar-to: oklch(0.3 0.13 283);
+  --sidebar-foreground: oklch(0.9 0.02 275);
+  --sidebar-primary: oklch(0.5 0.2 283);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.3 0.09 275);
+  --sidebar-accent-foreground: oklch(0.99 0 0);
+  --sidebar-border: oklch(0.3 0.06 275);
+  --sidebar-ring: oklch(0.708 0 0);
+  --profit: oklch(0.7 0.14 160);
+  --loss: oklch(0.62 0.2 25);
+  --be: oklch(0.62 0.15 260);
+  /* Darker variants for text only (4.5:1 on white and on the 15-20% tints); fills and charts keep the lighter ones. */
+  --profit-text: oklch(0.51 0.126 160);
+  --loss-text: oklch(0.545 0.2 25);
+  --be-text: oklch(0.525 0.15 260);
+  /* Color of a balance line (first slot of the validated categorical palette). */
+  --series-1: #2a78d6;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.18 0.02 275);
+  --foreground: oklch(0.96 0.005 275);
+  --card: oklch(0.225 0.025 275);
+  --card-foreground: oklch(0.96 0.005 275);
+  --popover: oklch(0.25 0.03 275);
+  --popover-foreground: oklch(0.96 0.005 275);
+  --primary: oklch(0.62 0.2 283);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.28 0.03 275);
+  --secondary-foreground: oklch(0.96 0.005 275);
+  --muted: oklch(0.28 0.03 275);
+  --muted-foreground: oklch(0.72 0.02 275);
+  --accent: oklch(0.3 0.04 275);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.68 0.2 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.65 0.16 283);
+  --profit: oklch(0.72 0.15 160);
+  --loss: oklch(0.68 0.2 25);
+  --be: oklch(0.7 0.14 260);
+  /* Lighter text variants: 4.5:1 or more on the dark cards and on the 15-20% tints. */
+  --profit-text: oklch(0.78 0.15 160);
+  --loss-text: oklch(0.74 0.17 25);
+  --be-text: oklch(0.76 0.12 260);
+  /* Flat sidebar, darker than the page in dark mode, so the content stays the focus. */
+  --sidebar: oklch(0.15 0.05 278);
+  --sidebar-to: var(--sidebar);
+  --series-1: #3987e5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    /* Keep room for the page scrollbar, so the layout does not shift when it appears (e.g. a taller month). */
+    scrollbar-gutter: stable;
+  }
+  /* Tailwind 4 leaves buttons on the default arrow: show the hand on anything clickable. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  select:not(:disabled),
+  input[type="file"]:not(:disabled) {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  /* The list of a native select takes the colors of its options: without this it stays white in dark mode. */
+  option,
+  optgroup {
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+  }
+  /* Digits of the same width so amounts line up in table columns. */
+  td,
+  th {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Entrance animations: cards rise in one after the other, gauges and bars draw themselves.
+   The reduced-motion rule below cuts all of them to an instant jump to the final state. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes gauge-draw {
+  from {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+}
+@keyframes ring-draw {
+  from {
+    stroke-dasharray: 0 100;
+  }
+}
+@keyframes bar-scale {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes chart-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+.chart-reveal {
+  animation: chart-reveal 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) 0.15s backwards;
+}
+.stagger > * {
+  animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.stagger > :nth-child(2) {
+  animation-delay: 60ms;
+}
+.stagger > :nth-child(3) {
+  animation-delay: 120ms;
+}
+.stagger > :nth-child(4) {
+  animation-delay: 180ms;
+}
+.stagger > :nth-child(5) {
+  animation-delay: 240ms;
+}
+.stagger > :nth-child(6) {
+  animation-delay: 300ms;
+}
+.stagger > :nth-child(7) {
+  animation-delay: 360ms;
+}
+.stagger > :nth-child(n + 8) {
+  animation-delay: 420ms;
+}
+.cell-in {
+  /* Fade only: a sliding cell would stick out of its scroll container and flash a scrollbar. */
+  animation: fade 0.4s ease-out both;
+  animation-delay: calc(var(--i, 0) * 14ms);
+}
+.gauge-segment {
+  stroke-dasharray: 100;
+  animation: gauge-draw 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.25s + var(--i, 0) * 0.18s);
+}
+.ring-arc {
+  animation: ring-draw 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.25s both;
+}
+.bar-scale {
+  transform-box: view-box;
+  transform-origin: 0 50%;
+  animation: bar-scale 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.25s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Rich text of the day notes (Tiptap): no typography plugin, so the few elements it produces are styled here. */
+.note-editor {
+  min-height: 12rem;
+  padding: 0.75rem;
+  outline: none;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.note-editor > * + * {
+  margin-top: 0.5rem;
+}
+.note-editor h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.note-editor h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.note-editor h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.note-editor blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 0.75rem;
+  color: var(--muted-foreground);
+}
+.note-editor ul:not([data-type="taskList"]) {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.note-editor ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+.note-editor ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+.note-editor ul[data-type="taskList"] li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.note-editor ul[data-type="taskList"] li > label {
+  margin-top: 0.3rem;
+}
+.note-editor ul[data-type="taskList"] li[data-checked="true"] > div {
+  color: var(--muted-foreground);
+  text-decoration: line-through;
+}
+
+/* Pictures, code, dividers, highlights and links of the notes. */
+.note-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  margin: 0.25rem 0;
+}
+.note-editor img.ProseMirror-selectednode {
+  outline: 2px solid var(--ring);
+}
+.note-editor pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: var(--muted);
+  padding: 0.75rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+}
+.note-editor hr {
+  margin: 0.75rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.note-editor mark {
+  border-radius: 0.2rem;
+  padding: 0 0.1rem;
+  /* The highlight colors are pale in both themes: keep the text dark on them. */
+  color: oklch(0.2 0 0);
+}
+.note-editor a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Document look: a comfortable reading size, and a hint on the empty line being typed. */
+.note-editor {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+.note-editor .is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+.note-editor p {
+  margin: 0;
+}
+
+/* Pictures: dragging a corner resizes (ratio kept), the toolbar aligns them, the column width caps them. */
+.note-editor [data-resize-container] {
+  margin: 0.5rem 0;
+  max-width: 100%;
+}
+.note-editor [data-resize-container]:has(img[data-align="center"]) {
+  justify-content: center;
+}
+.note-editor [data-resize-container]:has(img[data-align="right"]) {
+  justify-content: flex-end;
+}
+.note-editor [data-resize-wrapper] {
+  max-width: 100%;
+}
+.note-editor [data-resize-wrapper] img {
+  margin: 0;
+  max-width: 100%;
+  /* The size is kept by width alone: the height follows, also when the column is narrower than the picture. */
+  height: auto !important;
+}
+.note-editor [data-resize-handle] {
+  z-index: 2;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 2px solid var(--background);
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.note-editor [data-resize-handle="bottom-right"] {
+  cursor: nwse-resize;
+  transform: translate(50%, 50%);
+}
+.note-editor [data-resize-handle="bottom-left"] {
+  cursor: nesw-resize;
+  transform: translate(-50%, 50%);
+}
+.note-editor [data-resize-container]:hover [data-resize-handle],
+.note-editor [data-resize-container][data-resize-state="true"] [data-resize-handle],
+.note-editor [data-resize-container].ProseMirror-selectednode [data-resize-handle] {
+  opacity: 1;
+}
+
+/* A picture opens big on a double click: show it can be clicked. */
+.note-editor [data-resize-wrapper] img {
+  cursor: zoom-in;
+}
+
+/*
+ * Phones and touch screens (an iPhone, or a window narrower than 640 px): Apple asks for controls of at
+ * least 44 px, and iOS Safari zooms into any field whose text is under 16 px, which breaks the layout.
+ * Left outside the Tailwind layers on purpose: it wins over the size classes of the desktop design.
+ */
+@media (pointer: coarse), (max-width: 639px) {
+  button:not([role="checkbox"]):not([role="switch"]):not([role="radio"]):not([data-compact]),
+  [data-slot="button"],
+  [role="tab"],
+  summary,
+  select {
+    min-height: 44px;
+  }
+  button:has(svg:only-child),
+  [data-slot="button"]:has(svg:only-child) {
+    min-width: 44px;
+  }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]) {
+    min-height: 44px;
+  }
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea,
+  [contenteditable="true"] {
+    font-size: 16px;
+  }
+}
+
+/*
+ * Touch feedback: like a native app, whatever is tapped answers at once (pressed state). The grey flash Safari draws by
+ * default is removed and replaced by a short press: buttons shrink a little, links and rows fade. `scale`
+ * (not `transform`) so the translations some controls already use are left alone.
+ */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+@media (pointer: coarse), (max-width: 639px) {
+  button:not(:disabled),
+  [data-slot="button"],
+  [role="tab"],
+  [role="button"],
+  a[href],
+  summary,
+  select,
+  tbody tr {
+    transition:
+      scale 120ms ease-out,
+      opacity 120ms ease-out;
+  }
+  button:not(:disabled):active,
+  [data-slot="button"]:active,
+  [role="tab"]:active,
+  [role="button"]:active {
+    scale: 0.96;
+    opacity: 0.85;
+  }
+  a[href]:active,
+  summary:active,
+  tbody tr:active {
+    opacity: 0.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  button:active,
+  [data-slot="button"]:active,
+  [role="tab"]:active,
+  [role="button"]:active {
+    scale: 1;
+  }
+}
+
+/*
+ * No sideways movement on a phone. Nothing in the app is meant to pan left and right, except the few
+ * tables and toolbars that scroll by themselves (they are scroll containers of their own, so they keep
+ * working). On iOS, `overflow-x: hidden` on the body does not stop the page from panning when a single
+ * element is a little wider than the screen: the gesture itself is refused here instead. Pinch to
+ * zoom stays. Windows (the note of a day, the account panel) cannot be dragged sideways either.
+ * Outside the Tailwind layers, like the rules above.
+ */
+@media (max-width: 639px) {
+  html,
+  body {
+    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-x: none;
+  }
+  [role="dialog"] {
+    overflow-x: hidden;
+    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-x: none;
+  }
+}
